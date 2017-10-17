@@ -1,6 +1,9 @@
 import time
 import simpleaudio as sa
 import random
+import sys
+from sys import stdin
+import _thread
 
 #defineren van samples
 kick = sa.WaveObject.from_wave_file("/Users/nickverbeek/Documents/CSD2a/Audio files/Kick.wav")
@@ -78,14 +81,41 @@ def createPlaylists():
 
 		gridNum += 1
 
+
+#de commandline luisterd op de achtergrond altijd naar bepaalde commandos
+#zo kan de gebruiker kiezen om bepaalde dingen uit te voeren terwijl bijv. de beat speelt.
+def commandListener()
+	userInput = sys.stdin.read(8)
+	if (userInput=="play"):
+
+	elif (userInput=="stop")
+
+	elif (userInput=="new")
+
+	elif (userInput=="help")
+		print("-----------------Help------------------")
+		print("---------------------------------------")
+		print("|play------Afspelen van de beat-------|")
+		print("|stop------Stoppen van de beat--------|")
+		print("|new-------Genereer nieuwe beat-------|")
+		print("|exit------Sluit Beatmachine af-------|")
+		print("---------------------------------------")
+		print("---------------------------------------")
+
+
+
 #deze functie is voornamelijk de gebruikers interface waar de gebruiker mee werkt.
 def commandline():
 	print("______________Welkom!______________")
 	print("___________Beat Machine____________")
+	print("Voor hulp, gebruik het commando Help")
+	print("-----------------------------------")
 	BPM = input("Voor het gewenste beats per minute in: ")
 	print("U heeft " + BPM + " Bpm ingevuld!")
+	print("-----------------------------------")
 	maatsoort= input("Vul de gewenste maatsoort in. U kunt kiezen uit: 4/4, 5/4 en 7/4")
 	print("U heeft voor de " + maatsoort+ " maatsoort gekozen!")
+	print("-----------------------------------")
 
 	pass
 
