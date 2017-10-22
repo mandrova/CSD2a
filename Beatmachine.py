@@ -118,21 +118,27 @@ def sampleSelector():
 	print("De kick is succesvol geselecteerd met bestandsnaam: ", kickFilename)
 	print("------------------------------------")
 
-	
-	
-
 	#Snare
-	snareFilename = input("Drop hier je snare sample: ")
-	print("Geselecteerde Snare: ", snareFilename)
-	snare = sa.WaveObject.from_wave_file(snareFilename)
+	while True:
+		try:
+			snareFilename = input("Drop hier je snare sample: ")
+			snare = sa.WaveObject.from_wave_file(snareFilename)
+			break
+		except FileNotFoundError:
+			print("Het pad is niet juist. Probeer het opnieuw")
+	print("De snare is succesvol geselecteerd met bestandsnaam: ", snareFilename)
+	print("------------------------------------")
 
 	#Hihat
-	hatFilename = input("Drop hier je hihat sample: ")
-	print("Geselecteerde Hihat: ", hatFilename)
-	hat = sa.WaveObject.from_wave_file(hatFilename)
-
-
-
+	while True:
+		try:
+			hatFilename = input("Drop hier je hihat sample: ")
+			hat = sa.WaveObject.from_wave_file(hatFilename)
+			break
+		except FileNotFoundError:
+			print("Het pad is niet juist. Probeer het opnieuw")
+	print("De hihat is succesvol geselecteerd met bestandsnaam: ", hatFilename)
+	print("------------------------------------")
 
 
 #deze functie is voornamelijk de gebruikers interface waar de gebruiker mee werkt.
@@ -143,29 +149,39 @@ def commandline():
 	print("------------------------------------")
 
 	#Vraagt de gebruiker om het aantal bpm
-	BPM = input("Voor het gewenste beats per minute in: ")
-	print("U heeft " + BPM + " Bpm ingevuld!")
+	while True:
+		try:
+			BPM = int(input("Voor het gewenste beats per minute in: "))
+			
+			break
+		except Exception:
+			print("probleem")
+	print("U heeft ", BPM, " Bpm ingevuld!")
 	print("------------------------------------")
 
 	#vraagt de gebruiker om de maatsoort in te voeren.
-	maatsoort= input("Vul de gewenste maatsoort in. U kunt kiezen uit: 4/4, 5/4 en 7/4: ")
+	while True:
+		maatsoort= input("Vul de gewenste maatsoort in. U kunt kiezen uit: 4/4, 5/4 en 7/4: ")
+		if (maatsoort == "4/4" or (maatsoort == "5/4") or (maatsoort == "7/4")):
+			break
+		else:
+			print("Probeer het opnieuw")
 	print("U heeft voor de " + maatsoort+ " maatsoort gekozen!")
 	print("------------------------------------")
 
 	#vraagt de gebruiker of hij/zij eigensamples wil gebruiken
 	#bij ja zal het programma voor iedere partij een sample vragen.
-	
-	error=0
-	while error==0:
+	#wanneer een foutief antwoord is gegeven zal er gevraagt worden om het opnieuw te proberen.
+	while True:
 		ownSamples = input("Wil u eigen samples gebruiken? Gebruik J voor Ja of N voor Nee: ")
 		if (ownSamples == "J") or (ownSamples == "j"):
 			print("U heeft evoor gekozen om eigen samples te kiezen.")
 			sampleSelector()
-			error=1
+			break
 		elif (ownSamples == "N") or (ownSamples == "n"):
 			print("U heeft ervoor gekozen om geen gebruik te maken van eigen samples.")
 			print("Er wordt gebruik gemaakt van de default samples")
-			error=1
+			break
 		else:
 			print("U heeft ", ownSamples, " ingevoerd. Probeer het opnieuw")
 
