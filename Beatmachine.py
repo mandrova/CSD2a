@@ -4,6 +4,7 @@ import random
 import sys
 from sys import stdin
 import _thread
+import os
 
 #defineren van samples
 kick = sa.WaveObject.from_wave_file("/Users/nickverbeek/Documents/CSD2a/Audio files/Kick.wav")
@@ -102,20 +103,75 @@ def commandListener():
 		print("---------------------------------------")
 		print("---------------------------------------")
 
+def sampleSelector():
+	#vraagt het pad aan de gebruiker.
+	#hij/zij kan de sample in het venster droppen zodat het pad wordt over genomen.
+
+	#Kick
+	while True:
+		try:
+			kickFilename = input("Drop hier je kick sample: ")
+			kick = sa.WaveObject.from_wave_file(kickFilename)
+			break
+		except FileNotFoundError:
+			print("Het pad is niet juist. Probeer het opnieuw")
+	print("De kick is succesvol geselecteerd met bestandsnaam: ", kickFilename)
+	print("------------------------------------")
+
+	
+	
+
+	#Snare
+	snareFilename = input("Drop hier je snare sample: ")
+	print("Geselecteerde Snare: ", snareFilename)
+	snare = sa.WaveObject.from_wave_file(snareFilename)
+
+	#Hihat
+	hatFilename = input("Drop hier je hihat sample: ")
+	print("Geselecteerde Hihat: ", hatFilename)
+	hat = sa.WaveObject.from_wave_file(hatFilename)
+
+
+
 
 
 #deze functie is voornamelijk de gebruikers interface waar de gebruiker mee werkt.
 def commandline():
-	print("______________Welkom!______________")
-	print("___________Beat Machine____________")
+	print("_______________Welkom!______________")
+	print("____________Beat Machine____________")
 	print("Voor hulp, gebruik het commando Help")
-	print("-----------------------------------")
+	print("------------------------------------")
+
+	#Vraagt de gebruiker om het aantal bpm
 	BPM = input("Voor het gewenste beats per minute in: ")
 	print("U heeft " + BPM + " Bpm ingevuld!")
-	print("-----------------------------------")
-	maatsoort= input("Vul de gewenste maatsoort in. U kunt kiezen uit: 4/4, 5/4 en 7/4")
+	print("------------------------------------")
+
+	#vraagt de gebruiker om de maatsoort in te voeren.
+	maatsoort= input("Vul de gewenste maatsoort in. U kunt kiezen uit: 4/4, 5/4 en 7/4: ")
 	print("U heeft voor de " + maatsoort+ " maatsoort gekozen!")
-	print("-----------------------------------")
+	print("------------------------------------")
+
+	#vraagt de gebruiker of hij/zij eigensamples wil gebruiken
+	#bij ja zal het programma voor iedere partij een sample vragen.
+	
+	error=0
+	while error==0:
+		ownSamples = input("Wil u eigen samples gebruiken? Gebruik J voor Ja of N voor Nee: ")
+		if (ownSamples == "J") or (ownSamples == "j"):
+			print("U heeft evoor gekozen om eigen samples te kiezen.")
+			sampleSelector()
+			error=1
+		elif (ownSamples == "N") or (ownSamples == "n"):
+			print("U heeft ervoor gekozen om geen gebruik te maken van eigen samples.")
+			print("Er wordt gebruik gemaakt van de default samples")
+			error=1
+		else:
+			print("U heeft ", ownSamples, " ingevoerd. Probeer het opnieuw")
+
+	print("------------------------------------")
+
+
 
 	pass
 
@@ -139,5 +195,5 @@ def main():
 
 		time.sleep(bpm)
 	
-
+os.system("clear")
 commandline()
