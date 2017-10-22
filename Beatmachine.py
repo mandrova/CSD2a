@@ -121,26 +121,6 @@ def commandline():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def main():
 	bpm = int(input("Voer het aantal bpm in: "))
 	bpm = (60/bpm)/4 
@@ -160,4 +140,4 @@ def main():
 		time.sleep(bpm)
 	
 
-main()
+commandline()
