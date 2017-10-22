@@ -32,7 +32,7 @@ def playSnare():
 #als deze functie wordt aangesproken moet er een precentage worden meegegeven.
 #vervolgens zal er random een getal uit een van de lijsten worden gekozen afhankelijk van het precentage.
 #de uitkomt kan 1 of 0 zijn en wordt terug gegeven.
-int rand(int procent):
+def rand(procent):
 	if (procent == 100):
 		randlist=[1,1,1,1,1]
 	elif (procent == 80):
@@ -51,15 +51,15 @@ int rand(int procent):
 #Het aanmaken van een grid gebeurd aan de hand van de gekozen maatsoort.
 #Hieronder worden verschillende lijsten aangemaakt met procent waarden.
 #Ook wordt een gridsize meegegeven. Dit is voor het afspelen later.
-def createGrid(string beat):
+def createGrid(beat):
 	if (beat == "4/4"):
 		gridSize=16
 		kickAccent=[100,0,40,20,0,0,20,0,20,0,80,20,0,0,0,0]
 		snareAccent=[0,0,0,0,100,0,0,60,0,0,80,0,0,100,0,20,40]
-	elif (beat == "5/4")
+	elif (beat == "5/4"):
 		gridSize=20
 		accenten=[2,0,0,1,0,2,0,0,1,0,2,0,0,1,0,2,0,0,1,0]
-	elif (beat == "7/4")
+	elif (beat == "7/4"):
 		gridSize=28
 		accenten=[2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0]
 
@@ -69,11 +69,11 @@ def createPlaylists():
 	gridNum=0
 	while gridNum<gridSize+1:
 		accent = kickAccent[gridNum]
-		if (gridNum==3) and (kickPlayList[2]>0)
+		if (gridNum==3) and (kickPlayList[2]>0):
 			kickPlayList[3]=0
-		elif (gridNum==11) and (kickPlayList[10]>0)
+		elif (gridNum==11) and (kickPlayList[10]>0):
 			kickPlayList[11]=0
-		else
+		else:
 			kickPlayList[gridNum]=rand(accent)
 
 		accent = snareAccent[gridNum]
@@ -84,15 +84,15 @@ def createPlaylists():
 
 #de commandline luisterd op de achtergrond altijd naar bepaalde commandos
 #zo kan de gebruiker kiezen om bepaalde dingen uit te voeren terwijl bijv. de beat speelt.
-def commandListener()
+def commandListener():
 	userInput = sys.stdin.read(8)
 	if (userInput=="play"):
-
-	elif (userInput=="stop")
-
-	elif (userInput=="new")
-
-	elif (userInput=="help")
+		print("Play")
+	elif (userInput=="stop"):
+		print("Stop")
+	elif (userInput=="new"):
+		print("New")
+	elif (userInput=="help"):
 		print("-----------------Help------------------")
 		print("---------------------------------------")
 		print("|play------Afspelen van de beat-------|")
