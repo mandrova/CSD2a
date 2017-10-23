@@ -57,8 +57,9 @@ def rand(procent):
 #Hieronder worden verschillende lijsten aangemaakt met procent waarden.
 #Ook wordt een gridsize meegegeven. Dit is voor het afspelen later.
 def createGrid(beat):
+	global gridSize
 	if (beat == "4/4"):
-		global gridSize
+		
 		gridSize=16
 
 		global kickAccent
@@ -73,7 +74,14 @@ def createGrid(beat):
 
 	elif (beat == "5/4"):
 		gridSize=20
-		accenten=[2,0,0,1,0,2,0,0,1,0,2,0,0,1,0,2,0,0,1,0]
+		
+		kickAccent=[100,0,40,0,0,0,0,0,100,0,20,0,0,0,60,0,0,0,100,0,0]
+		kickPlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+		
+		snareAccent=[0,0,0,0,100,0,0,0,0,0,40,0,100,0,0,0,60,0,0,0,0]
+		
+		snarePlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	elif (beat == "7/4"):
 		gridSize=28
 		accenten=[2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0]
@@ -81,33 +89,62 @@ def createGrid(beat):
 
 #Hier worden de afspeel lijsten gegenereerd.
 #Dit gebeurd aan de hand van de lijsten die bij createGrid zijn gegenereerd
-def createPlaylists():
-	gridNum=0
-	
-	#Kick
-	while gridNum<gridSize:
-		if (gridNum==3) and (kickPlayList[2]>0):
-			kickPlayList[3]=0
-		elif (gridNum==11) and (kickPlayList[10]>0):
-			kickPlayList[11]=0
-		else:
-			kickPlayList[gridNum]=rand(kickAccent[gridNum])
-		gridNum += 1
+def createPlaylists(beat):
+	if (beat=="4/4"):
+		gridNum=0
+		
+		#Kick
+		while gridNum<gridSize:
+			if (gridNum==3) and (kickPlayList[2]>0):
+				kickPlayList[3]=0
+			elif (gridNum==11) and (kickPlayList[10]>0):
+				kickPlayList[11]=0
+			else:
+				kickPlayList[gridNum]=rand(kickAccent[gridNum])
+			gridNum += 1
 
-	gridNum=0
-	while gridNum<gridSize:
-		if (gridNum==15) and (snarePlayList[14]>0):
-			snarePlayList[15]=0
-		else:
+		#Snare
+		gridNum=0
+		while gridNum<gridSize:
+			if (gridNum==15) and (snarePlayList[14]>0):
+				snarePlayList[15]=0
+			else:
+				snarePlayList[gridNum]=rand(snareAccent[gridNum])
+
+			#accent = snareAccent[gridNum]
+			#snarePlayList[gridNum]=rand(accent)
+
+			gridNum += 1
+
+		global hatPlayList
+		hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
+
+	if (beat=="5/4"):
+		gridNum=0
+		
+		#Kick
+		while gridNum<gridSize:
+			kickPlayList[gridNum]=rand(kickAccent[gridNum])
+			gridNum += 1
+
+		#Snare
+		gridNum=0
+		while gridNum<gridSize:
 			snarePlayList[gridNum]=rand(snareAccent[gridNum])
 
-		#accent = snareAccent[gridNum]
-		#snarePlayList[gridNum]=rand(accent)
+			#accent = snareAccent[gridNum]
+			#snarePlayList[gridNum]=rand(accent)
 
-		gridNum += 1
+			gridNum += 1
 
-	global hatPlayList
-	hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
+		
+		hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
+
+
+
+
+
+
 
 	print("Kick Playlist   : ", kickPlayList)
 	print("Snare Playlist  : ", snarePlayList)
@@ -127,7 +164,7 @@ def commandListener():
 			stopPlaying=1
 		elif (userInput=="new"):
 			print("------------Nieuwe Beat-------------")
-			createPlaylists()
+			createPlaylists(maatsoort)
 		elif (userInput=="exit"):
 			break
 		elif (userInput=="help"):
@@ -198,7 +235,7 @@ def play():
 			playHihat()
 
 		gridNum += 1
-		if (gridNum==16):
+		if (gridNum==gridSize):
 			gridNum=0
 		time.sleep(noteDuration)
 
@@ -221,6 +258,7 @@ def commandline():
 	print("------------------------------------")
 
 	#vraagt de gebruiker om de maatsoort in te voeren.
+	global maatsoort
 	while True:
 		maatsoort= input("Vul de gewenste maatsoort in. U kunt kiezen uit: 4/4, 5/4 en 7/4: ")
 		if (maatsoort == "4/4" or (maatsoort == "5/4") or (maatsoort == "7/4")):
@@ -254,7 +292,7 @@ def commandline():
 	print("-----Beat wordt nu gegenereerd------")
 
 	createGrid(maatsoort)
-	createPlaylists()
+	createPlaylists(maatsoort)
 
 	t = Thread(target=commandListener)
 	t.start()
