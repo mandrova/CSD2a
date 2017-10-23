@@ -5,6 +5,7 @@ import sys
 from sys import stdin
 from threading import Thread
 import os
+from midiutil.MidiFile import MIDIFile
 
 #defineren van samples
 kick = sa.WaveObject.from_wave_file("/Users/nickverbeek/Documents/CSD2a/Audio files/Kick.wav")
@@ -239,6 +240,45 @@ def play():
 			gridNum=0
 		time.sleep(noteDuration)
 
+def createMidiFile():
+	# create your MIDI object
+	mf = MIDIFile(1)     # only 1 track
+	track = 0   # the only track
+
+	time = 0    # start at the beginning
+	mf.addTrackName(track, time, "BeatMachine")
+	mf.addTempo(track, time, bpm)
+
+	# add some notes
+	channel = 0
+	volume = 100
+
+	for x in range(0,len(kickPlayList)):
+		if (kickPlayList[x]==1):
+			pitch = 36           # C4 (middle C)
+			time = x/4             # start on beat 0
+			duration = 0.5         # 1 beat long
+			mf.addNote(track, channel, pitch, time, duration, volume)
+
+		if (snarePlayList[x]==1):
+			pitch = 38           # C4 (middle C)
+			time = x/4             # start on beat 0
+			duration = 0.5         # 1 beat long
+			mf.addNote(track, channel, pitch, time, duration, volume)
+
+		if (hatPlayList[x]==1):
+			pitch = 42           # C4 (middle C)
+			time = x/4             # start on beat 0
+			duration = 0.5         # 1 beat long
+			mf.addNote(track, channel, pitch, time, duration, volume)
+
+
+
+	# write it to disk
+	with open("output.mid", 'wb') as outf:
+	    mf.writeFile(outf)
+
+
 #deze functie is voornamelijk de gebruikers interface waar de gebruiker mee werkt.
 def commandline():
 	print("_______________Welkom!______________")
@@ -296,6 +336,8 @@ def commandline():
 
 	t = Thread(target=commandListener)
 	t.start()
+
+	createMidiFile()
 
 	play()
 	
