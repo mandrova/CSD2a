@@ -22,6 +22,11 @@ snareAccent=[]
 global stop
 
 
+def systemExit():
+	exit()
+	exit()
+
+
 #Afspeel functies
 def playKick():
 	kick.play()
@@ -31,6 +36,11 @@ def playHihat():
 
 def playSnare():
 	snare.play()
+
+
+
+
+
 
 #rand word gebruikt om te bepalen of een instrument mag worden gespeelt of niet.
 #als deze functie wordt aangesproken moet er een precentage worden meegegeven.
@@ -53,6 +63,12 @@ def rand(procent):
 	result = random.choice(randlist)
 
 	return result
+
+
+	
+
+
+
 
 #Het aanmaken van een grid gebeurd aan de hand van de gekozen maatsoort.
 #Hieronder worden verschillende lijsten aangemaakt met procent waarden.
@@ -78,15 +94,24 @@ def createGrid(beat):
 		
 		kickAccent=[100,0,40,0,0,0,0,0,100,0,20,0,0,0,60,0,0,0,100,0,0]
 		kickPlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-
 		
 		snareAccent=[0,0,0,0,100,0,0,0,0,0,40,0,100,0,0,0,60,0,0,0,0]
 		
 		snarePlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+	
 	elif (beat == "7/4"):
 		gridSize=28
-		accenten=[2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0,2,0,0,1,0,0,1,0]
+		kickAccent=[100,0,0,0,0,0,80,0,60,0,60,0,0,0,60,0,60,0,40,0,40,0,60,0,0,0,0,0,0]
+		kickPlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+		snareAccent=[0,0,0,0,80,0,0,0,40,0,0,0,80,0,40,0,0,0,40,0,60,0,60,0,60,0,80,0]
+		snarePlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	
+
+
+
+
+
 
 #Hier worden de afspeel lijsten gegenereerd.
 #Dit gebeurd aan de hand van de lijsten die bij createGrid zijn gegenereerd
@@ -112,14 +137,13 @@ def createPlaylists(beat):
 			else:
 				snarePlayList[gridNum]=rand(snareAccent[gridNum])
 
-			#accent = snareAccent[gridNum]
-			#snarePlayList[gridNum]=rand(accent)
-
 			gridNum += 1
 
 		global hatPlayList
 		hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
 
+
+	#create Playlist voor 5/4e maatsoort
 	if (beat=="5/4"):
 		gridNum=0
 		
@@ -137,19 +161,41 @@ def createPlaylists(beat):
 			#snarePlayList[gridNum]=rand(accent)
 
 			gridNum += 1
-
 		
 		hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
 
+	#create Playlist voor 7/4e maatsoort
+	if (beat=="7/4"):
+		gridNum=0
+		
+		#Kick
+		while gridNum<gridSize:
+			kickPlayList[gridNum]=rand(kickAccent[gridNum])
+			gridNum += 1
 
+		#Snare
+		gridNum=0
+		while gridNum<gridSize:
+			if(kickPlayList[gridNum]>0):
+				snarePlayList[gridNum]=0
+			else:
+				snarePlayList[gridNum]=rand(snareAccent[gridNum])
 
-
-
-
+			gridNum += 1
+		
+		hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
 
 	print("Kick Playlist   : ", kickPlayList)
 	print("Snare Playlist  : ", snarePlayList)
 	print("Hihat Playlist  : ", hatPlayList)
+
+
+
+
+
+
+
+
 
 
 #de commandline luisterd op de achtergrond altijd naar bepaalde commandos
@@ -157,27 +203,34 @@ def createPlaylists(beat):
 def commandListener():
 	while True:
 		userInput = input("Command: ");
-		if (userInput=="play"):
-			print("Beat wordt afgespeelt")
-			play()
-		elif (userInput=="stop"):
+		if (userInput=="stop"):
 			print("Beat is gestopt met afspelen")
 			stopPlaying=1
 		elif (userInput=="new"):
 			print("------------Nieuwe Beat-------------")
 			createPlaylists(maatsoort)
 		elif (userInput=="exit"):
-			break
+			print("Bedankt voor het gebruik van Beatmachine")
+			print("-------------Tot Ziens--------------")
+			os._exit(1)
+		elif (userInput=="save"):
+			createMidiFile()
 		elif (userInput=="help"):
 			print("-----------------Help------------------")
 			print("---------------------------------------")
-			print("|play------Afspelen van de beat-------|")
 			print("|stop------Stoppen van de beat--------|")
 			print("|new-------Genereer nieuwe beat-------|")
+			print("|save------Sla beat op in midi bestand|")
 			print("|exit------Sluit Beatmachine af-------|")
 			print("---------------------------------------")
 			print("---------------------------------------")
-	exit()
+
+
+
+
+
+
+
 
 
 def sampleSelector():
@@ -218,6 +271,14 @@ def sampleSelector():
 	print("------------------------------------")
 
 
+
+
+
+
+
+
+
+#speel de gegenereerde beat af.
 def play():
 	noteDuration = (60/bpm)/4
 	gridNum=0
@@ -240,16 +301,25 @@ def play():
 			gridNum=0
 		time.sleep(noteDuration)
 
-def createMidiFile():
-	# create your MIDI object
-	mf = MIDIFile(1)     # only 1 track
-	track = 0   # the only track
 
-	time = 0    # start at the beginning
+
+
+
+
+
+
+
+#met deze functie wordt er een midifile aangemaakt.
+def createMidiFile():
+	
+	mf = MIDIFile(1)   
+	track = 0   
+
+	time = 0    
 	mf.addTrackName(track, time, "BeatMachine")
 	mf.addTempo(track, time, bpm)
 
-	# add some notes
+	#voeg noten toe aan midi file
 	channel = 0
 	volume = 100
 
@@ -272,11 +342,19 @@ def createMidiFile():
 			duration = 0.5         # 1 beat long
 			mf.addNote(track, channel, pitch, time, duration, volume)
 
-
-
-	# write it to disk
-	with open("output.mid", 'wb') as outf:
+	# schijf midi file weg naar hdd
+	with open("BeatMachine.mid", 'wb') as outf:
 	    mf.writeFile(outf)
+
+	print("Beat is weggeschreven in het midi bestand.")
+
+
+
+
+
+
+
+
 
 
 #deze functie is voornamelijk de gebruikers interface waar de gebruiker mee werkt.
@@ -284,6 +362,9 @@ def commandline():
 	print("_______________Welkom!______________")
 	print("____________Beat Machine____________")
 	print("------------------------------------")
+
+
+
 
 	#Vraagt de gebruiker om het aantal bpm
 	global bpm
@@ -297,6 +378,10 @@ def commandline():
 	print("U heeft ", bpm, " Bpm ingevuld!")
 	print("------------------------------------")
 
+
+
+
+
 	#vraagt de gebruiker om de maatsoort in te voeren.
 	global maatsoort
 	while True:
@@ -307,6 +392,9 @@ def commandline():
 			print("U heeft een foutieve maatsoort ingevoerd. Probeer het opnieuw")
 	print("U heeft voor de ", maatsoort, " maatsoort gekozen!")
 	print("------------------------------------")
+
+
+
 
 	#vraagt de gebruiker of hij/zij eigensamples wil gebruiken
 	#bij ja zal het programma voor iedere partij een sample vragen.
@@ -324,23 +412,30 @@ def commandline():
 		else:
 			print("U heeft ", ownSamples, " ingevoerd. Probeer het opnieuw")
 
+
+
+
+	#informatie naar gebruiker
 	print("------------------------------------")
 	print("Voor hulp, gebruik het commando Help")
-	
-	
-
 	print("-----Beat wordt nu gegenereerd------")
 
+
+
+
+	#genereer een beat doormiddeld van de ingevulde gegevens.
 	createGrid(maatsoort)
 	createPlaylists(maatsoort)
 
+	#laad de commandlistener zodat de gebruiker interactie kan hebben met de applicatie
 	t = Thread(target=commandListener)
 	t.start()
 
-	createMidiFile()
-
+	#speel automatisch de beat af.
 	play()
 	
-
+#maak de terminal schoon van alle commands
 os.system("clear")
+
+#start applicatie
 commandline()
