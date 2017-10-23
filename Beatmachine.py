@@ -7,24 +7,14 @@ from threading import Thread
 import os
 from midiutil.MidiFile import MIDIFile
 
-#defineren van samples
+#defineren van default samples
 kick = sa.WaveObject.from_wave_file("/Users/nickverbeek/Documents/CSD2a/Audio files/Kick.wav")
 snare = sa.WaveObject.from_wave_file("/Users/nickverbeek/Documents/CSD2a/Audio files/Snare.wav")
 hat = sa.WaveObject.from_wave_file("/Users/nickverbeek/Documents/CSD2a/Audio files/Hat.wav")
 
 #aanmaken lijsten
 global randlist
-accenten=[]
-#gridSize=0
-#kickPlayList=[]
-#kickAccent=[]
 snareAccent=[]
-global stop
-
-
-def systemExit():
-	exit()
-	exit()
 
 
 #Afspeel functies
@@ -79,11 +69,15 @@ def createGrid(beat):
 		
 		gridSize=16
 
+		#maak variabelen globaal zodat ze buiten de functie leesbaar zijn.
+		#maak tevens lijsten met procenten en reserveer plaatsen in de playlist.
+		#Kick
 		global kickAccent
 		kickAccent=[100,0,40,20,0,0,20,0,20,0,80,20,0,0,0,0]
 		global kickPlayList
 		kickPlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
+		#Snare
 		global snareAccent
 		snareAccent=[0,0,0,0,100,0,0,60,0,80,0,0,100,0,20,40,0]
 		global snarePlayList
@@ -92,18 +86,22 @@ def createGrid(beat):
 	elif (beat == "5/4"):
 		gridSize=20
 		
+		#Kick
 		kickAccent=[100,0,40,0,0,0,0,0,100,0,20,0,0,0,60,0,0,0,100,0,0]
 		kickPlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 		
+		#Snare
 		snareAccent=[0,0,0,0,100,0,0,0,0,0,40,0,100,0,0,0,60,0,0,0,0]
-		
 		snarePlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	
 	elif (beat == "7/4"):
 		gridSize=28
+
+		#Kick
 		kickAccent=[100,0,0,0,0,0,80,0,60,0,60,0,0,0,60,0,60,0,40,0,40,0,60,0,0,0,0,0,0]
 		kickPlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
+		#Snare
 		snareAccent=[0,0,0,0,80,0,0,0,40,0,0,0,80,0,40,0,0,0,40,0,60,0,60,0,60,0,80,0]
 		snarePlayList=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	
@@ -116,11 +114,14 @@ def createGrid(beat):
 #Hier worden de afspeel lijsten gegenereerd.
 #Dit gebeurd aan de hand van de lijsten die bij createGrid zijn gegenereerd
 def createPlaylists(beat):
+	
+	#create Playlist voor 4/4e maatsoort
 	if (beat=="4/4"):
 		gridNum=0
 		
 		#Kick
 		while gridNum<gridSize:
+			#regels zodat er een keuze wordt gemaakt wanneer een kick wel of niet mag worden gespeelt
 			if (gridNum==3) and (kickPlayList[2]>0):
 				kickPlayList[3]=0
 			elif (gridNum==11) and (kickPlayList[10]>0):
@@ -132,6 +133,7 @@ def createPlaylists(beat):
 		#Snare
 		gridNum=0
 		while gridNum<gridSize:
+			#regels voor de snare wanneer wel en niet mag worden gespeelt.
 			if (gridNum==15) and (snarePlayList[14]>0):
 				snarePlayList[15]=0
 			else:
@@ -141,6 +143,9 @@ def createPlaylists(beat):
 
 		global hatPlayList
 		hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
+
+
+
 
 
 	#create Playlist voor 5/4e maatsoort
@@ -164,6 +169,9 @@ def createPlaylists(beat):
 		
 		hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
 
+
+
+
 	#create Playlist voor 7/4e maatsoort
 	if (beat=="7/4"):
 		gridNum=0
@@ -185,6 +193,7 @@ def createPlaylists(beat):
 		
 		hatPlayList=[1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
 
+	#geef de gegenereerde beat weer in de console
 	print("Kick Playlist   : ", kickPlayList)
 	print("Snare Playlist  : ", snarePlayList)
 	print("Hihat Playlist  : ", hatPlayList)
@@ -203,10 +212,7 @@ def createPlaylists(beat):
 def commandListener():
 	while True:
 		userInput = input("Command: ");
-		if (userInput=="stop"):
-			print("Beat is gestopt met afspelen")
-			stopPlaying=1
-		elif (userInput=="new"):
+		if (userInput=="new"):
 			print("------------Nieuwe Beat-------------")
 			createPlaylists(maatsoort)
 		elif (userInput=="exit"):
@@ -215,10 +221,12 @@ def commandListener():
 			os._exit(1)
 		elif (userInput=="save"):
 			createMidiFile()
+			createPlaylists(maatsoort)
+			print("------------Nieuwe Beat-------------")
+			print("Als u de beat wilt opslaan gebruik het commando 'save'")
 		elif (userInput=="help"):
 			print("-----------------Help------------------")
 			print("---------------------------------------")
-			print("|stop------Stoppen van de beat--------|")
 			print("|new-------Genereer nieuwe beat-------|")
 			print("|save------Sla beat op in midi bestand|")
 			print("|exit------Sluit Beatmachine af-------|")
@@ -237,7 +245,7 @@ def sampleSelector():
 	#vraagt het pad aan de gebruiker.
 	#hij/zij kan de sample in het venster droppen zodat het pad wordt over genomen.
 
-	#Kick
+	##Vraag om een nieuwe kijk file. Bij fout opnieuw probeeren.
 	while True:
 		try:
 			kickFilename = input("Drop hier je kick sample: ")
@@ -248,7 +256,7 @@ def sampleSelector():
 	print("De kick is succesvol geselecteerd met bestandsnaam: ", kickFilename)
 	print("------------------------------------")
 
-	#Snare
+	#Vraag om een nieuwe snare file. Bij fout opnieuw probeeren.
 	while True:
 		try:
 			snareFilename = input("Drop hier je snare sample: ")
@@ -259,7 +267,7 @@ def sampleSelector():
 	print("De snare is succesvol geselecteerd met bestandsnaam: ", snareFilename)
 	print("------------------------------------")
 
-	#Hihat
+	#Vraag om een nieuwe hihat file. Bij fout opnieuw probeeren.
 	while True:
 		try:
 			hatFilename = input("Drop hier je hihat sample: ")
@@ -280,25 +288,34 @@ def sampleSelector():
 
 #speel de gegenereerde beat af.
 def play():
+	
+	#bereken het aantal miliseconden
 	noteDuration = (60/bpm)/4
-	gridNum=0
-	stopPlaying=0
-	while True:
-		if (stopPlaying==1):
-			break
 
+
+	gridNum=0
+	while True:
+
+		#speel kick bij het lezen van een 1
 		if (kickPlayList[gridNum]==1):
 			playKick()
 
+		#speel snare bij het lezen van een 1
 		if (snarePlayList[gridNum]==1):
 			playSnare()
 
+		#speel hihat bij het lezen van een 1
 		if (hatPlayList[gridNum]==1):
 			playHihat()
 
+		#stap extra op de grid
 		gridNum += 1
+
+		#reset de grid voor het loopen.
 		if (gridNum==gridSize):
 			gridNum=0
+
+		#wacht even een aantal miliseconden. Deze is gelijk aan het aantap beats per minuut
 		time.sleep(noteDuration)
 
 
@@ -325,27 +342,28 @@ def createMidiFile():
 
 	for x in range(0,len(kickPlayList)):
 		if (kickPlayList[x]==1):
-			pitch = 36           # C4 (middle C)
-			time = x/4             # start on beat 0
-			duration = 0.5         # 1 beat long
+			pitch = 36           
+			time = x/4             
+			duration = 0.5         
 			mf.addNote(track, channel, pitch, time, duration, volume)
 
 		if (snarePlayList[x]==1):
-			pitch = 38           # C4 (middle C)
-			time = x/4             # start on beat 0
-			duration = 0.5         # 1 beat long
+			pitch = 38           
+			time = x/4             
+			duration = 0.5         
 			mf.addNote(track, channel, pitch, time, duration, volume)
 
 		if (hatPlayList[x]==1):
-			pitch = 42           # C4 (middle C)
-			time = x/4             # start on beat 0
-			duration = 0.5         # 1 beat long
+			pitch = 42         
+			time = x/4          
+			duration = 0.5   
 			mf.addNote(track, channel, pitch, time, duration, volume)
 
 	# schijf midi file weg naar hdd
 	with open("BeatMachine.mid", 'wb') as outf:
 	    mf.writeFile(outf)
 
+	#laat de gebruiker weten dat de beat is opgeslagen
 	print("Beat is weggeschreven in het midi bestand.")
 
 
@@ -389,6 +407,7 @@ def commandline():
 		if (maatsoort == "4/4" or (maatsoort == "5/4") or (maatsoort == "7/4")):
 			break
 		else:
+			#wanneer input niet matched een foutmelding geven.
 			print("U heeft een foutieve maatsoort ingevoerd. Probeer het opnieuw")
 	print("U heeft voor de ", maatsoort, " maatsoort gekozen!")
 	print("------------------------------------")
@@ -426,6 +445,8 @@ def commandline():
 	#genereer een beat doormiddeld van de ingevulde gegevens.
 	createGrid(maatsoort)
 	createPlaylists(maatsoort)
+
+	print("Als u de beat wilt opslaan gebruik het commando 'save'")
 
 	#laad de commandlistener zodat de gebruiker interactie kan hebben met de applicatie
 	t = Thread(target=commandListener)
