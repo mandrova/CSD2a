@@ -213,14 +213,27 @@ def commandListener():
 	while True:
 		userInput = input("Command: ");
 		if (userInput=="new"):
+			os.system("clear")
+			print("____________Beat Machine____________")
+			print("------------------------------------")
+			print("Bpm: ",bpm, " Maatsoort: ", maatsoort)
 			print("------------Nieuwe Beat-------------")
 			createPlaylists(maatsoort)
+			print("Als u de beat wilt opslaan gebruik het commando 'save'")
 		elif (userInput=="exit"):
+			os.system("clear")
+			print("____________Beat Machine____________")
+			print("------------------------------------")
 			print("Bedankt voor het gebruik van Beatmachine")
 			print("-------------Tot Ziens--------------")
 			os._exit(1)
 		elif (userInput=="save"):
 			createMidiFile()
+			os.system("clear")
+			print("____________Beat Machine____________")
+			print("------------------------------------")
+			print("Bpm: ",bpm, " Maatsoort: ", maatsoort)
+			print("------------------------------------")
 			createPlaylists(maatsoort)
 			print("------------Nieuwe Beat-------------")
 			print("Als u de beat wilt opslaan gebruik het commando 'save'")
@@ -232,6 +245,8 @@ def commandListener():
 			print("|exit------Sluit Beatmachine af-------|")
 			print("---------------------------------------")
 			print("---------------------------------------")
+		else:
+			print("Commando: ", userInput, " is geen geldig commando. Gebruik het commando help voor alle commando's")
 
 
 
@@ -332,7 +347,7 @@ def createMidiFile():
 	mf = MIDIFile(1)   
 	track = 0   
 
-	time = 0    
+	time = 0 #waar in de file beginnen.
 	mf.addTrackName(track, time, "BeatMachine")
 	mf.addTempo(track, time, bpm)
 
@@ -392,7 +407,7 @@ def commandline():
 			
 			break
 		except Exception:
-			print("probleem")
+			print("U heeft geen cijfer ingevoerd. Probeer het opnieuw")
 	print("U heeft ", bpm, " Bpm ingevuld!")
 	print("------------------------------------")
 
@@ -431,6 +446,11 @@ def commandline():
 		else:
 			print("U heeft ", ownSamples, " ingevoerd. Probeer het opnieuw")
 
+
+	os.system("clear")
+	print("____________Beat Machine____________")
+	print("------------------------------------")
+	print("Bpm: ",bpm, " Maatsoort: ", maatsoort)
 
 
 
