@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>AudioPlayer.h</itemPath>
+      <itemPath>Interval.h</itemPath>
+      <itemPath>IntervalGenerator.h</itemPath>
+      <itemPath>IntervalTrainer.h</itemPath>
+      <itemPath>Screen.h</itemPath>
+      <itemPath>SolfegeSynth.h</itemPath>
+      <itemPath>Synthesizer.h</itemPath>
+      <itemPath>jack_module.h</itemPath>
+      <itemPath>mtofConverter.h</itemPath>
+      <itemPath>musicianModule.h</itemPath>
+      <itemPath>musicianModuleMenu.h</itemPath>
+      <itemPath>oscillator.h</itemPath>
+      <itemPath>sine.h</itemPath>
+      <itemPath>square.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>AudioPlayer.cpp</itemPath>
+      <itemPath>Interval.cpp</itemPath>
+      <itemPath>IntervalGenerator.cpp</itemPath>
+      <itemPath>IntervalTrainer.cpp</itemPath>
+      <itemPath>Screen.cpp</itemPath>
+      <itemPath>SolfegeSynth.cpp</itemPath>
+      <itemPath>Synthesizer.cpp</itemPath>
+      <itemPath>jack_module.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>mtofConverter.cpp</itemPath>
+      <itemPath>musicianModule.cpp</itemPath>
+      <itemPath>musicianModuleMenu.cpp</itemPath>
+      <itemPath>oscillator.cpp</itemPath>
+      <itemPath>sine.cpp</itemPath>
+      <itemPath>square.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+      </compileType>
+      <item path="AudioPlayer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AudioPlayer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Interval.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Interval.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IntervalGenerator.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IntervalGenerator.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IntervalTrainer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IntervalTrainer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Screen.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Screen.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SolfegeSynth.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SolfegeSynth.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Synthesizer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Synthesizer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jack_module.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="jack_module.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mtofConverter.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mtofConverter.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="musicianModule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="musicianModule.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="musicianModuleMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="musicianModuleMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="oscillator.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="oscillator.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="sine.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="sine.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="square.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="square.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="AudioPlayer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AudioPlayer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Interval.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Interval.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IntervalGenerator.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IntervalGenerator.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="IntervalTrainer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="IntervalTrainer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Screen.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Screen.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SolfegeSynth.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SolfegeSynth.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Synthesizer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Synthesizer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="jack_module.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="jack_module.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mtofConverter.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="mtofConverter.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="musicianModule.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="musicianModule.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="musicianModuleMenu.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="musicianModuleMenu.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="oscillator.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="oscillator.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="sine.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="sine.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="square.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="square.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
