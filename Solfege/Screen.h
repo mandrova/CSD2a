@@ -30,8 +30,11 @@ private:
     void askModuleScreen();
     void musicianMenuScreen();
     void musicianTrainerScreen();
+    void intervalTrainerScreen();
     
     int screen;
+    int excercise;
+    int userSelection;
     
 };
 

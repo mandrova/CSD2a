@@ -14,14 +14,14 @@ GREP=grep
 NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
-CC=gcc
-CCC=g++
-CXX=g++
+CC=clang
+CCC=clang++
+CXX=clang++
 FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-MacOSX
+CND_PLATFORM=CLang-MacOSX
 CND_DLIB_EXT=dylib
 CND_CONF=Release
 CND_DISTDIR=dist
@@ -38,15 +38,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/AudioPlayer.o \
 	${OBJECTDIR}/Interval.o \
 	${OBJECTDIR}/IntervalGenerator.o \
-	${OBJECTDIR}/IntervalTrainer.o \
 	${OBJECTDIR}/Screen.o \
 	${OBJECTDIR}/SolfegeSynth.o \
 	${OBJECTDIR}/Synthesizer.o \
 	${OBJECTDIR}/jack_module.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/mtofConverter.o \
-	${OBJECTDIR}/musicianModule.o \
-	${OBJECTDIR}/musicianModuleMenu.o \
 	${OBJECTDIR}/oscillator.o \
 	${OBJECTDIR}/sine.o \
 	${OBJECTDIR}/square.o
@@ -91,11 +87,6 @@ ${OBJECTDIR}/IntervalGenerator.o: IntervalGenerator.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IntervalGenerator.o IntervalGenerator.cpp
 
-${OBJECTDIR}/IntervalTrainer.o: IntervalTrainer.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/IntervalTrainer.o IntervalTrainer.cpp
-
 ${OBJECTDIR}/Screen.o: Screen.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -120,21 +111,6 @@ ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
-
-${OBJECTDIR}/mtofConverter.o: mtofConverter.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/mtofConverter.o mtofConverter.cpp
-
-${OBJECTDIR}/musicianModule.o: musicianModule.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/musicianModule.o musicianModule.cpp
-
-${OBJECTDIR}/musicianModuleMenu.o: musicianModuleMenu.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/musicianModuleMenu.o musicianModuleMenu.cpp
 
 ${OBJECTDIR}/oscillator.o: oscillator.cpp
 	${MKDIR} -p ${OBJECTDIR}

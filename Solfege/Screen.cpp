@@ -18,7 +18,6 @@
 #include <unistd.h>
 
 #include "Screen.h"
-#include "musicianModule.h"
 #include "IntervalTrainer.h"
 #include "IntervalGenerator.h"
 #include "Interval.h"
@@ -44,6 +43,8 @@ void Screen::setScreen(int screenNumber){
         case 2 : musicianMenuScreen();
             break;
         case 3 : musicianTrainerScreen();
+            break;
+        case 4: intervalTrainerScreen();
             break;
     }
 }
@@ -105,8 +106,32 @@ void Screen::musicianMenuScreen(){
     std::cout << "--------------------Musician Menu--------------------" << std::endl;
     std::cout << "-----------------------------------------------------" << std::endl;
     
-    musicianModule musMod;
-    musMod.musicianTrainer();
+    //instruction text
+    std::cout << "------Please select the desired trainer. Choose: ----" << std::endl;
+    std::cout << "-----------------0: Interval Trainer-----------------" << std::endl;
+    std::cout << "-----------------1: Scale Trainer--------------------" << std::endl;
+    std::cout << "-----------------------------------------------------" << std::endl;
+    
+    //ask user input
+    std::cout << "> ";
+    std::cin >> this->userSelection;
+    
+    //check if input is an integer. Otherwise try again.
+    while(!std::cin.good()){
+        std::cin.clear();
+        std::cin.ignore(INT_MAX, '\n');
+        std::cout << "No correct number has been given. Please try again" << std::endl;
+        std::cout << "Please use numbers 0 and 1 for the selection------" << std::endl;
+        std::cout << "> ";
+        std::cin >> this->userSelection;
+    }
+    
+    switch(this->userSelection){
+        case 0: setScreen(3);
+            break;
+        //case 1: //link to scale trainer. Future function
+            //break;
+    }
 }
 
 void Screen::musicianTrainerScreen(){
@@ -116,16 +141,16 @@ void Screen::musicianTrainerScreen(){
     std::cout << "--------------Musician Interval Trainer--------------" << std::endl;
     std::cout << "-----------------------------------------------------" << std::endl;
     
-    
-    //std::thread firstNoteThread {&IntervalTrainer::playNote, firstNote, IntervalTrainer()};
-    //firstNoteThread.
-    //usleep(1000);
-    //midi.stopRunning();
-    //std::thread secondNoteThread {&IntervalTrainer::playNote, IntervalTrainer()};
-    //usleep(1000);
-    //midi.stopRunning();
 }
 
-void play(){
-    
+void Screen::intervalTrainerScreen(){
+    //top text
+    std::cout << "-----------------------Rules-------------------------" << std::endl;
+    std::cout << "-----------------------------------------------------" << std::endl;
+    std::cout << "A Interval will be generated. Every interval has two " << std::endl;
+    std::cout << "notes. Wich will be played in serial. The interval \n"
+            "can be replayed by typing 'play' and hit enter. By using\n"
+            "the intervallist you can choose the right interval that \n"
+            "has been played." << std::endl;
 }
+

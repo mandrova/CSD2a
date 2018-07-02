@@ -2,10 +2,10 @@ CC = g++
 CFLAGS = -I/usr/local/include -Wall -std=c++1z
 LDFLAGS= -ljack
 
-all: example
+all: synthesizer
 
-example : sine.o oscillator.o jack_module.o mtofConverter.o Screen.o musicianModule.o musicianModuleMenu.o IntervalTrainer.o IntervalGenerator.o Interval.o AudioPlayer.o Synthesiser.o SolfegeSynth.o main.o 
-	$(CC) -o $@ $(CFLAGS) sine.o oscillator.o jack_module.o mtofConverter.o Screen.o musicianModule.o musicianModuleMenu.o IntervalTrainer.o IntervalGenerator.o Interval.o AudioPlayer.o Synthesiser.o SolfegeSynth.o main.o $(LDFLAGS)
+synthesizer : sine.o oscillator.o jack_module.o Screen.o IntervalGenerator.o Interval.o AudioPlayer.o Synthesizer.o SolfegeSynth.o main.o 
+	$(CC) -o $@ $(CFLAGS) sine.o oscillator.o jack_module.o Screen.o IntervalGenerator.o Interval.o AudioPlayer.o Synthesizer.o SolfegeSynth.o main.o $(LDFLAGS)
 
 .cpp.o:
 	$(CC) -c $< $(CFLAGS)

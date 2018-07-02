@@ -11,6 +11,7 @@
 //TEMP - remove
 #include "math.h"
 #include "jack_module.h"
+#include <functional>
 
 // prototypes & globals
 static void jack_shutdown(void *);

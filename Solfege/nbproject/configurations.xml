@@ -7,14 +7,10 @@
       <itemPath>AudioPlayer.h</itemPath>
       <itemPath>Interval.h</itemPath>
       <itemPath>IntervalGenerator.h</itemPath>
-      <itemPath>IntervalTrainer.h</itemPath>
       <itemPath>Screen.h</itemPath>
       <itemPath>SolfegeSynth.h</itemPath>
       <itemPath>Synthesizer.h</itemPath>
       <itemPath>jack_module.h</itemPath>
-      <itemPath>mtofConverter.h</itemPath>
-      <itemPath>musicianModule.h</itemPath>
-      <itemPath>musicianModuleMenu.h</itemPath>
       <itemPath>oscillator.h</itemPath>
       <itemPath>sine.h</itemPath>
       <itemPath>square.h</itemPath>
@@ -29,15 +25,11 @@
       <itemPath>AudioPlayer.cpp</itemPath>
       <itemPath>Interval.cpp</itemPath>
       <itemPath>IntervalGenerator.cpp</itemPath>
-      <itemPath>IntervalTrainer.cpp</itemPath>
       <itemPath>Screen.cpp</itemPath>
       <itemPath>SolfegeSynth.cpp</itemPath>
       <itemPath>Synthesizer.cpp</itemPath>
       <itemPath>jack_module.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
-      <itemPath>mtofConverter.cpp</itemPath>
-      <itemPath>musicianModule.cpp</itemPath>
-      <itemPath>musicianModuleMenu.cpp</itemPath>
       <itemPath>oscillator.cpp</itemPath>
       <itemPath>sine.cpp</itemPath>
       <itemPath>square.cpp</itemPath>
@@ -76,10 +68,6 @@
       </item>
       <item path="IntervalGenerator.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="IntervalTrainer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="IntervalTrainer.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Screen.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Screen.h" ex="false" tool="3" flavor2="0">
@@ -97,18 +85,6 @@
       <item path="jack_module.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="mtofConverter.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="mtofConverter.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="musicianModule.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="musicianModule.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="musicianModuleMenu.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="musicianModuleMenu.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="oscillator.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -155,10 +131,6 @@
       </item>
       <item path="IntervalGenerator.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="IntervalTrainer.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="IntervalTrainer.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Screen.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Screen.h" ex="false" tool="3" flavor2="0">
@@ -176,18 +148,6 @@
       <item path="jack_module.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="mtofConverter.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="mtofConverter.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="musicianModule.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="musicianModule.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="musicianModuleMenu.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="musicianModuleMenu.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="oscillator.cpp" ex="false" tool="1" flavor2="0">
       </item>

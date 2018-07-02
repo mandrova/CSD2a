@@ -24,17 +24,17 @@ SolfegeSynth::~SolfegeSynth() {
 }
 
 void SolfegeSynth::process(float *outputBuffer, int numSamples){
-  //std::cout << "SimpleSynth || process()" << std::endl;
   for (int i = 0; i < numSamples; i++) {
     outputBuffer[i] = oscPointer->getSample();
     oscPointer->tick();
+    //std::cout << "i = " << i << "numSamples: " << numSamples << std::endl;
   }
 }
 
 void SolfegeSynth::setWave(int waveType) {
     switch (waveType) {
         case 0:
-          oscPointer = &sine;
+          oscPointer = &sine; //assign sinewave to oscPointer
           break;
         case 1:
           //oscPointer = &square;
@@ -45,6 +45,7 @@ void SolfegeSynth::setWave(int waveType) {
 }
 
 void SolfegeSynth::updatePitch(){
+    //create an instance for mtofConverter
     mtofConverter noteConverter;
-    oscPointer->setFreq(noteConverter.mtof(getPitch()), getSampleRate());
+    oscPointer->setFreq(getPitch(), getSampleRate());
 }

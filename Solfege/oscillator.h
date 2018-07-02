@@ -9,7 +9,7 @@ class Oscillator
 {
 public:
   Oscillator();
-  Oscillator(float freq);
+  Oscillator(float freq, int sampleRate);
   ~Oscillator();
 
   virtual float getSample() = 0;
@@ -25,9 +25,8 @@ protected:
   double phaseStep;
 
 private:
-  float freq;
+  float freq = 440;
   int sampleRate;
-  static constexpr double twoPi = 2 * 3.14159265358979323846;
 
 
 

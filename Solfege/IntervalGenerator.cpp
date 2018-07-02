@@ -15,6 +15,8 @@
 #include "Interval.h"
 #include <vector>
 #include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 
 //Interval interval;
 
@@ -58,7 +60,7 @@ void IntervalGenerator::generateInterval(){
             break;
     }
     
-    interval.setInterval(firstNote, secondNote);//set interval
+    interval.setInterval(mtof(firstNote), mtof(secondNote));//set interval
     
 }
 
@@ -72,4 +74,10 @@ int IntervalGenerator::getSecondIntervalNote(){
 
 int IntervalGenerator::getAnswer(){
     return this->answer;
+}
+
+int IntervalGenerator::mtof(int midiNote){
+    int frequency;
+    frequency = 440*(pow(2.0f, ((midiNote - 60)/12)));
+    return frequency;
 }

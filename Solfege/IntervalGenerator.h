@@ -26,6 +26,7 @@ public:
     int getFirstIntervalNote();
     int getSecondIntervalNote();
     int getAnswer();
+    int mtof(int);
 private:
     Interval interval;
     int answer;
